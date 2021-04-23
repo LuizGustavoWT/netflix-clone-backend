@@ -1,0 +1,13 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "allowJs": true,
+    "paths": {
+      "@modules/*": ["./src/modules/*"],
+      "@infra/*": ["./src/infra/*"],
+      "@config/*": ["./src/config/*"]
+    }
+  }
+}

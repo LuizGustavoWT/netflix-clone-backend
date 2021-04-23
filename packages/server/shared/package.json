@@ -1,0 +1,13 @@
+{
+  "name": "@server/shared",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "multer": "^1.4.2"
+  }
+}
