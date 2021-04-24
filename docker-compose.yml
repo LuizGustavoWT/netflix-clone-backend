@@ -13,7 +13,7 @@ services:
     volumes: 
       - pg_content_data:/bitnami/postgresql
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "kong"]
+      test: ["CMD", "pg_isready", "-U", ${DB_CONTENT_DATABASE}]
       interval: 5s
       timeout: 5s
       retries: 5
