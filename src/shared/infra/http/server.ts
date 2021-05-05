@@ -1,5 +1,6 @@
+import '@shared/containers';
 import { app } from './app';
-import '@infra/typeorm';
+import '@shared/infra/typeorm';
 
 app.listen(3333, () => {
   console.log(`Service: Contents Iniciado`);

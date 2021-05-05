@@ -1,6 +1,6 @@
+import crypto from 'crypto';
 import multer, { StorageEngine } from 'multer';
 import path from 'path';
-import crypto from 'crypto';
 
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
@@ -18,6 +18,8 @@ interface IUploadConfig {
     };
     minio: {
       bucket: string;
+      accessKey: string;
+      secretKey: string;
     };
   };
 }
@@ -45,6 +47,8 @@ export default {
     },
     minio: {
       bucket: process.env.BUCKET_NAME,
+      accessKey: process.env.MINIO_ACCESS_KEY,
+      secretKey: process.env.MINIO_SECRET_KEY,
     },
   },
 } as IUploadConfig;

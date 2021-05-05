@@ -1,5 +1,5 @@
 import 'dotenv/config';
 
-import '@infra/http/server';
+import '@shared/infra/http/server';
 
 import '@modules/contents';

@@ -9,7 +9,7 @@
     "allowJs": true,
     "paths": {
       "@modules/*": ["./src/modules/*"],
-      "@infra/*": ["./src/infra/*"],
+      "@infra/*": ["src/shared/infra/*"],
       "@config/*": ["./src/config/*"],
       "@shared/*": ["./src/shared/*"]
     },

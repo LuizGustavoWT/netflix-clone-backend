@@ -1,7 +1,6 @@
 version: "3.7"
 
 services:
-
   content_database: 
     image: bitnami/postgresql
     container_name: DBContent
@@ -13,75 +12,15 @@ services:
     volumes: 
       - pg_content_data:/bitnami/postgresql
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", ${DB_CONTENT_DATABASE}]
+      test: ["CMD", "pg_isready", "-U", "${DB_CONTENT_DATABASE}"]
       interval: 5s
       timeout: 5s
       retries: 5
-
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-    extra_hosts:
-      - "host.docker.internal:172.17.0.1"
-    networks: 
-      - app-net
-
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    depends_on:
-      - zookeeper
-    ports:
-      - "9092:9092"
-      - "9094:9094"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_LISTENERS: INTERNAL://:9092,OUTSIDE://:9094
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://host.docker.internal:9094
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
-    extra_hosts:
-      - "host.docker.internal:172.17.0.1"
-    networks: 
-      - app-net
-
-  control-center:
-    image: confluentinc/cp-enterprise-control-center:6.0.1
-    hostname: control-center
-    depends_on:
-      - kafka
-    ports:
-      - "9021:9021"
-    environment:
-      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'kafka:9092'
-      CONTROL_CENTER_REPLICATION_FACTOR: 1
-      CONTROL_CENTER_CONNECT_CLUSTER: http://kafka-connect:8083
-      PORT: 9021
-    extra_hosts:
-      - "host.docker.internal:172.17.0.1"
-    networks: 
-      - app-net
-
-  kafka-topics-generator:
-    image: confluentinc/cp-kafka:latest
-    depends_on:
-      - kafka
-    command: >
-      bash -c
-        "sleep 5s &&
-        kafka-topics --create --topic=content.new-content --if-not-exists --bootstrap-server=kafka:9092 &&
-        kafka-topics --create --topic=content.update-content --if-not-exists --bootstrap-server=kafka:9092"
 
 networks:
   app-net:
     driver: bridge
 
 volumes:
-  zookeeper_data:
-    driver: local
-  kafka_data:
-    driver: local
   pg_content_data:
     driver: local
