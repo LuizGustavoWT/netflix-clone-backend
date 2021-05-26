@@ -7,8 +7,5 @@ export interface IMoviesRepository {
   create: (data: ICreateMovieDTO) => Promise<Movie>;
   findById: (movie_id: string) => Promise<Movie | undefined>;
   save: (movie: Movie) => Promise<Movie>;
-  /* linkMovieToCategories: (
-    movie: Movie,
-    categories: Category[],
-  ) => Promise<Movie>; */
+  getMoviesByCategory: (category_id: string) => Promise<Movie[]>;
 }

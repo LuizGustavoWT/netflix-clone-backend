@@ -8,4 +8,5 @@ export interface ICategoriesRepository {
   getCategoriesById: (
     categories_ids: string[],
   ) => Promise<Category[] | undefined>;
+  getAll: () => Promise<Category[]>;
 }

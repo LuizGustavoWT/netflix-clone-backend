@@ -39,6 +39,12 @@ class MoviesRepository implements IMoviesRepository {
   async save(movie: Movie): Promise<Movie> {
     return this.repository.save(movie);
   }
+
+  async getMoviesByCategory(category_id: string): Promise<Movie[]> {
+    return this.repository.find({
+      relations: ['categories'],
+    });
+  }
 }
 
 export { MoviesRepository };

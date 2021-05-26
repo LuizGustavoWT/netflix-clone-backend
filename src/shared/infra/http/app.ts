@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 
 import AppError from '@shared/error/AppError';
@@ -9,6 +10,7 @@ import 'express-async-errors';
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use(router);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {

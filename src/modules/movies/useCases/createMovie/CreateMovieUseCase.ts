@@ -1,5 +1,6 @@
 import uploads from '@config/uploads';
 import { Movie } from '@modules/movies/infra/typeorm/entities/Movie';
+import { IMoviesKafkaEvents } from '@modules/movies/repositories/IMoviesKafkaEvents';
 import { IMoviesRepository } from '@modules/movies/repositories/IMoviesRepository';
 import { inject, injectable } from 'tsyringe';
 

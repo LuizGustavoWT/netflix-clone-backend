@@ -32,7 +32,10 @@ class MinioStorageProvider implements IStorageProvider {
 
     const fileStat = await fs.promises.stat(originalPath);
 
-    await this.client.putObject(bucket, file, fileContent, fileStat.size);
+    await this.client.putObject(bucket, file, fileContent, fileStat.size, {
+      ContentType: 'image',
+      Client: 'http://localhost:3333',
+    });
 
     await fs.promises.unlink(originalPath);
 

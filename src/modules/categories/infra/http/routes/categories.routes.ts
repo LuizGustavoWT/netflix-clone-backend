@@ -7,4 +7,6 @@ const categoriesController = new CategoriesController();
 
 categoriesRouter.post('/', categoriesController.create);
 
+categoriesRouter.get('/', categoriesController.read);
+
 export { categoriesRouter };

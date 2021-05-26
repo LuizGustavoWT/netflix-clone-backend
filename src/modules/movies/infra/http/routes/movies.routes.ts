@@ -22,4 +22,6 @@ moviesRouter.post(
 
 moviesRouter.post('/:id/categories', movieCategoriesController.create);
 
+moviesRouter.get('/:id/categories', movieCategoriesController.read);
+
 export { moviesRouter };
